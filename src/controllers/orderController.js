@@ -285,7 +285,7 @@ exports.cancelOrder = async (req, res, next) => {
     clearCache('products_');
 
     
-    const orderDetails = await Order.findOne({ orderId: order._id
+    const orderDetails = await Order.findOne({ orderId: order.orderId
     }).populate('items.product').populate('user', '-password');
 
     res.json({
