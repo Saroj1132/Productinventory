@@ -17,7 +17,6 @@ A complete e-commerce backend API built with Node.js, Express, and MongoDB.
 - Node.js
 - Express.js
 - MongoDB
-- Mongoose
 - JWT
 - Bcrypt
 
@@ -32,7 +31,7 @@ npm install
 ```
 PORT=3000
 MONGODB_URI=mongodb://localhost:27017/ecommerce
-JWT_SECRET=your_jwt_secret_key
+JWT_SECRET=ecommerce2026
 JWT_EXPIRES_IN=24h
 NODE_ENV=development
 ```
@@ -62,7 +61,7 @@ npm start
 - GET `/api/orders/my-orders` - Get customer orders
 - GET `/api/orders/all` - Get all orders (Admin only)
 - GET `/api/orders/:orderId` - Get order by ID
-- PATCH `/api/orders/:orderId/cancel` - Cancel order
+- GET `/api/orders/:orderId/cancel` - Cancel order
 
 ## Project Structure
 
@@ -84,12 +83,6 @@ src/
 - Role-based authorization
 - Rate limiting (10 requests per minute)
 - Input validation
-
-## Order Lifecycle
-
-CREATED → CONFIRMED → SHIPPED → DELIVERED
-   ↓
-CANCELLED
 
 ## Payment Processing
 

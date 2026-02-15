@@ -1,7 +1,7 @@
 {
   "name": "ecommerce-api",
   "version": "1.0.0",
-  "description": "E-commerce API with authentication, orders, and inventory management",
+  "description": "E-commerce API",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
