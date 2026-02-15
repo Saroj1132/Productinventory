@@ -63,7 +63,7 @@ exports.createOrder = async (req, res, next) => {
 
     await processPayment(order._id);
 
-    const orderDetails = await Order.findOne({ orderId: order._id
+    const orderDetails = await Order.findOne({ orderId: order.orderId
     }).populate('items.product').populate('user', '-password');
 
     res.status(201).json({
