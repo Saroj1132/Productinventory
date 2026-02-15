@@ -63,8 +63,12 @@ exports.createOrder = async (req, res, next) => {
 
     await processPayment(order._id);
 
+    const orderDetails = await Order.findOne({ orderId: order._id
+    }).populate('items.product').populate('user', '-password');
+
     res.status(201).json({
-      message: 'Order created successfully'
+      message: 'Order created successfully',
+      order: orderDetails
     });
   } catch (error) {
     next(error);
@@ -252,6 +256,10 @@ exports.cancelOrder = async (req, res, next) => {
       return res.status(403).json({ error: 'Access denied' });
     }
 
+    if (order.paymentStatus === 'FAILED') {
+      return res.status(400).json({ error: "Payment failed and cannot be cancelled." });
+    }
+
     if (order.status === 'CANCELLED') {
       return res.status(400).json({ error: 'Order already cancelled' });
     }
@@ -276,8 +284,13 @@ exports.cancelOrder = async (req, res, next) => {
     clearCache('prod_');
     clearCache('products_');
 
+    
+    const orderDetails = await Order.findOne({ orderId: order._id
+    }).populate('items.product').populate('user', '-password');
+
     res.json({
-      message: 'Order cancelled successfully'
+      message: 'Order cancelled successfully',
+      order: orderDetails
     });
   } catch (error) {
     next(error);
